@@ -53,7 +53,9 @@ function buyTicket(uint256 numberOfTickets) public payable {
      require(lotteryStatus == true, "Lottery is not running");
 // Lottery must be running
  require(msg.value == ticketCost * numberOfTickets, "Ticket cost is not correct");
-// Ticket cost must match the ticketCost variable / / Increment the count of entries for the participant entryCounts [msg.sender] + = numberOfTickets;
+// Ticket cost must match the ticketCost variable 
+// Increment the count of entries for the participant 
+entryCounts [msg.sender] + = numberOfTickets;
 totalEntries += numberOfTickets;
 if (!isPlayer(msg.sender)) {
      players.push(msg.sender);
@@ -105,8 +107,12 @@ function endLottery() public onlyAdmin {
          entryCounts [players[i]] = 0;
                   } 
                       } 
-                           function pickWinner() public onlyAdmin {
-                                     require(!lotteryStatus, "Lottery is still running"); //Lottery must not be running         require(playerSelector.length > 0, "No players in the lottery"); //There must be at least one player         require(nftContract != address(0), "NFT contract not set"); //NFT contract must be set          uint256 index = random() % playerSelector.length; //Get a random index         address winner = playerSelector[index];
+                      function pickWinner() public onlyAdmin {
+                     require(!lotteryStatus, "Lottery is still running"); //Lottery must not be running
+require(playerSelector.length > 0, "No players in the lottery"); //There must be at least one player
+require(nftContract != address(0), "NFT contract not set"); //NFT contract must be set  
+uint256 index = random() % playerSelector.length; //Get a random index 
+address winner = playerSelector[index];
 // Get the winner address
  emit Winner(winner);
 // Emit the event that a winner was picked
